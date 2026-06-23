@@ -1,0 +1,26 @@
+@import 'bootstrap';
+
+:root {
+    --bg-color: #F8F9FA;
+    --ui-color: #0D6EFD;
+    --text-color: #212529;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Inter', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, .navbar-brand {
+    font-family: 'Poppins', sans-serif;
+    color: var(--ui-color);
+}
+
+.img-d{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 500;
+    width: 500;
+}
