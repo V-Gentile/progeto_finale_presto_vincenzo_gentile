@@ -19,12 +19,14 @@
                 
                 <div class="col-12 col-md-4 mb-4">
                     <h2 class="mb-3">{{ $article_to_check->title }}</h2>
+                    <h3>Autore: {{ $article_to_check->user->name }}</h3>
                     <h4 class="text-primary mb-3">{{ $article_to_check->price }} €</h4>
                     <p><strong>Categoria:</strong> {{ $article_to_check->category->name }}</p>
                     <hr>
-                    <p>{{ $article_to_check->description }}</p>
+                    <p class="text-break">{{ $article_to_check->description }}</p>
                 </div>
 
+                <!-- Gestione Immagini -->
                 <div class="col-12 col-md-5 mb-4">
                     <div class="row g-2">
                         @if ($article_to_check->images->count())
@@ -35,16 +37,17 @@
                             @endforeach
                         @else
                             @for ($i = 0; $i < 6; $i++)
-                            <div class="col-6 text-center">
-                                <img src="https://picsum.photos/300" alt="immagine segnaposto" class="img-fluid rounded shadow-sm w-100 object-fit-cover" style="height: 150px;">
-                            </div>
+                                <div class="col-6 col-md-4 mb-4 text-center">
+                                    <img src="https://picsum.photos/300" alt="immagine segnaposto" class="img-fluid rounded shadow">
+                                </div>
                             @endfor
                         @endif
                     </div>
                 </div>
                 
+                <!-- Bottoni Azione -->
                 <div class="col-12 col-md-3 d-flex flex-column justify-content-center align-items-center gap-3">
-                    <form action="{{ route('revisor.accept', $article_to_check) }}" method="POST" class="w-100">
+                    <form action="{{ route('accept', ['article' => $article_to_check]) }}" method="POST" class="w-100">
                         @csrf
                         @method('PATCH')
                         <button type="submit" class="btn btn-success btn-lg w-100 fw-bold shadow-sm">
@@ -52,7 +55,7 @@
                         </button>
                     </form>
                     
-                    <form action="{{ route('revisor.reject', $article_to_check) }}" method="POST" class="w-100">
+                    <form action="{{ route('reject', ['article' => $article_to_check]) }}" method="POST" class="w-100">
                         @csrf
                         @method('PATCH')
                         <button type="submit" class="btn btn-danger btn-lg w-100 fw-bold shadow-sm">
@@ -60,6 +63,14 @@
                         </button>
                     </form>
                 </div>
+
+                @if (session()->has('message'))
+                    <div class="row justify-content-center mt-3">
+                        <div class="col-5 alert alert-success text-center shadow rounded">
+                            {{ session('message') }}
+                        </div>
+                    </div>
+                @endif
 
             </div>
         @else

@@ -14,5 +14,15 @@ return
         'cerca' => 'Cerca',
         'esci' => 'Salida',
         'lavora' => 'Trabaja con nosotros',
-        'revisore' => 'área de Auditores'
+        'revisore' => 'área de Auditores',
+        'Elettronica' => 'Electrónica',
+        'Abbigliamento' => 'Ropa',
+        'Motori' => 'Vehículos',
+        'Immobili' => 'Inmobiliaria',
+        'Sport' => 'Sport',
+        'Giochi' => 'Juegos',
+        'Libri' => 'Libros',
+        'Arredamento' => 'Muebles',
+        'Bellezza' => 'Belleza',
+        'Giardinaggio' => 'Jardinería'
     ];

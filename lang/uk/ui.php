@@ -14,5 +14,15 @@ return
         'cerca' => 'Search',
         'esci' => 'Exit',
         'lavora' => 'Work with us',
-        'revisore' => 'Auditor Area'
+        'revisore' => 'Auditor Area',
+        'Elettronica' => 'Electronics',
+        'Abbigliamento' => 'Clothing',
+        'Motori' => 'Motors',
+        'Immobili' => 'Real Estate',
+        'Sport' => 'Sport',
+        'Giochi' => 'Games',
+        'Libri' => 'Books',
+        'Arredamento' => 'Furniture',
+        'Bellezza' => 'Beauty',
+        'Giardinaggio' => 'Gardening'
     ];

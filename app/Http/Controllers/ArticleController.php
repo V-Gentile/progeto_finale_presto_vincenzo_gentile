@@ -10,19 +10,20 @@ class ArticleController extends Controller
 {
     public function index()
     {
-        $articles = Article::where('is_accepted', true)->latest()->take(30)->get();
-        return view('articles.index', compact('articles'));
+        $articles = Article::where('is_accepted', true)->orderBy('created_at', 'desc')->paginate(10);
+        return view('article.index', compact('articles'));
     }
 
     public function show(Article $article)
     {
-        return view('articles.show', compact('article'));
+        // L'iniezione di un singolo modello resta al singolare
+        return view('article.show', compact('article'));
     }
 
-    public function byCategory($category_id)
+    public function byCategory(Category $category)
     {
-        $category = Category::find($category_id);
-        $articles = $category->articles()->where('is_accepted', true)->latest()->take(30)->get();
-        return view('articles.category', compact('category', 'articles'));
+        // Utilizzo del Query Builder () per filtrare direttamente nel database
+        $articles = $category->articles()->where('is_accepted', true)->get();
+        return view('article.byCategory', compact('articles', 'category'));
     }
 }

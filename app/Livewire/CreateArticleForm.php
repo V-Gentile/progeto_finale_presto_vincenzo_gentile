@@ -5,31 +5,31 @@ namespace App\Livewire;
 use App\Models\Article;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-class CreateArticle extends Component
+class CreateArticleForm extends Component
 {
     use WithFileUploads;
 
+    #[Validate('required|min:5')]
     public $title;
+    #[Validate('required|min:10')]
     public $description;
+    #[Validate('required|numeric')]
     public $price;
+    #[Validate('required')]
     public $category_id;
     public $images=[];
-    public $temporary_images=[];
+    public $temporary_images;
 
 
     public function store()
     {
-        $this->validate([
-            'title' => 'required|min:2|max:100',
-            'description' => 'required|min:3|max:3000',
-            'price' => 'required|numeric|min:0',
-            'category_id' => 'required',
-        ]);
+        $this->validate();
 
-        $article = Article::create([
+        $this->article = Article::create([
             'title' => $this->title,
             'description' => $this->description,
             'price' => $this->price,
@@ -39,14 +39,14 @@ class CreateArticle extends Component
 
         if (count($this->images) > 0) {
             foreach ($this->images as $image) {
-                $article->images()->create(['path' => $image->store('images', 'public')]);
+                $this->article->images()->create(['path' => $image->store('images', 'public')]);
             }
         }
 
         session()->flash('message', 'Annuncio inserito con successo!');
         $this->cleanForm();
         
-        return redirect()->route('articles.index');
+        return redirect()->route('article.index');
     }
 
     public function render()

@@ -14,12 +14,28 @@
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Categorie
+                    </a>
+                    <ul class="dropdown-menu shadow-sm">
+                        @foreach ($categories as $category)
+                            <li>
+                                <a class="dropdown-item" href="{{ route('byCategory', ['category' => $category]) }}">{{ $category->name }}</a>
+                            </li>
+                            @if (!$loop->last)
+                                <hr class="dropdown-divider">
+                            @endif
+                        @endforeach
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         {{ __('ui.annunci') }}
                     </a>
                     <ul class="dropdown-menu shadow-sm">
-                        <li><a class="dropdown-item" href="{{ route('articles.index') }}">{{ __('ui.tutannunci') }}</a></li>
+                        <li><a class="dropdown-item" href="{{ route('article.index') }}">{{ __('ui.tutannunci') }}</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="/annunci/crea">{{ __('ui.crea') }}</a></li>
+                        <li><a class="dropdown-item" href="{{ route('article.create') }}">{{ __('ui.crea') }}</a></li>
                     </ul>
                 </li>
 
@@ -29,13 +45,13 @@
                             {{ auth()->user()->name }}
                         </a>
                         <ul class="dropdown-menu shadow-sm">
-                            @if (optional(auth()->user())->is_revisor)
+                            @if (Auth::user()->is_revisor)
                                 <li>
-                                    <a class="dropdown-item text-success fw-bold" href="{{ route('revisor.index') }}">{{ __('ui.revisore') }}</a>
-                                </li>
-                            @else
-                                <li>
-                                    <a class="dropdown-item" href="{{ route('careers') }}">{{ __('ui.lavora') }}</a>
+                                    <a class="dropdown-item text-success fw-bold" href="{{ route('revisor.index') }}">{{ __('ui.revisore') }}
+                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                            {{ \App\Models\Article::toBeRevisedCount() }}
+                                        </span>
+                                    </a>
                                 </li>
                             @endif
                             <li><hr class="dropdown-divider"></li>
@@ -61,12 +77,13 @@
                 <x-_locale lang="it"/>
                 <x-_locale lang="uk"/>
                 <x-_locale lang="es"/>
+
             </div>
 
             <form role="search" action="{{ route('article.search') }}" method="GET" class="d-flex">
                 <div class="input-group">
-                    <input type="search" name="query" class="form-control" placeholder="Cerca..." aria-label="search">
-                    <button type="submit" class="btn btn-outline-success">
+                    <input type="search" name="query" class="form-control" placeholder="{{ __('ui.cerca') }}..." aria-label="search">
+                    <button type="submit" class="input-group-text btn btn-outline-success" id="basic-addon2">
                         {{ __('ui.cerca') }}
                     </button>
                 </div>

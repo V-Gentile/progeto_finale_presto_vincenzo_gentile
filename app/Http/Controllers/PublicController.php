@@ -12,8 +12,14 @@ class PublicController extends Controller
 {
     public function home()
     {
-        $articles = Article::where('is_accepted', true)->latest()->take(4)->get();
+        $articles = Article::where('is_accepted', true)->orderBy('created_at', 'desc')->take(6)->get();
         return view('home', compact('articles'));
+    }
+
+    public function index()
+    {
+        $articles = Article::where('is_accepted', true)->orderBy('created_at', 'desc')->paginate(10);
+        return view('article.index', compact('articles'));
     }
 
     public function careers()
@@ -33,7 +39,7 @@ class PublicController extends Controller
     {
         $query = $request->input('query');
         $articles = Article::search($query)->where('is_accepted', true)->paginate(10);
-        return view('articles.search', ['articles' => $articles, 'query' => $query]);
+        return view('article.search', ['articles' => $articles, 'query' => $query]);
 
     }
 

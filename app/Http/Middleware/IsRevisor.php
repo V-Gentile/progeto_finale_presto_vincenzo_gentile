@@ -15,6 +15,6 @@ class IsRevisor
             return $next($request);
         }
 
-        return redirect('/')->with('message', 'Accesso negato. Solo i revisori possono entrare.');
+        return redirect()->route('home')->with('message', 'Accesso negato. Solo i revisori possono entrare.');
     }
 }

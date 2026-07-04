@@ -14,6 +14,16 @@ return
         'cerca' => 'Cerca',
         'esci' => 'Esci',
         'lavora' => 'Lavora con noi',
-        'revisore' => 'Zona Revisore'
+        'revisore' => 'Zona Revisore',
+        'Elettronica' => 'Elettronica',
+        'Abbigliamento' => 'Abbigliamento',
+        'Motori' => 'Motori',
+        'Immobili' => 'Immobili',
+        'Sport' => 'Sport',
+        'Giochi' => 'Giochi',
+        'Libri' => 'Libri',
+        'Arredamento' => 'Arredamento',
+        'Bellezza' => 'Bellezza',
+        'Giardinaggio' => 'Giardinaggio'
         
     ];

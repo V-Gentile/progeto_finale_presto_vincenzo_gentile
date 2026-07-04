@@ -28,11 +28,24 @@ class Article extends Model
     public function toSearchableArray(): array
     {
         return [
-            'id' => $this->id,
-            'title' => $this->title,
-            'description' => $this->description,
-            'category' => $this->category
+            'id' =>$this->id,
+            'title' =>$this->title,
+            'description' =>$this->description,
+            'category' =>$this->category
         ];
+    }
+
+    public function setAccepted($value)
+    {
+        $this->is_accepted = $value;
+        $this->save();
+        return true;
+
+    }
+
+    public static function toBeRevisedCount()
+    {
+        return Article::where('is_accepted', null)->count();
     }
 
     public function images(): HasMany

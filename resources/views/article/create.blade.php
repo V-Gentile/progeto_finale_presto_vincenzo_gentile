@@ -4,7 +4,7 @@
             <div class="col-md-8">
                 <h2 class="mb-4">Inserisci il tuo annuncio</h2>
                 
-                <livewire:create-article />
+                <livewire:create-article-form />
                 
             </div>
         </div>

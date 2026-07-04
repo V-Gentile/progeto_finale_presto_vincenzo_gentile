@@ -14,5 +14,8 @@
                 </div>
             @endforelse
         </div>
+        <div class="d-flex justify-content-center mt-4">
+            {{ $articles->links() }}
+        </div>
     </div>
 </x-layout>

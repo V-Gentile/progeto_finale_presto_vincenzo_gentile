@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Category;
 
-class CategorySeeder extends Seeder
+class CategoriesSeeder extends Seeder
 {
     protected $categories = [
         'Elettronica',
@@ -15,7 +15,9 @@ class CategorySeeder extends Seeder
         'Sport',
         'Giochi',
         'Libri',
-        'Arredamento'
+        'Arredamento',
+        'Bellezza',
+        'Giardinaggio'
     ];
 
     public function run(): void

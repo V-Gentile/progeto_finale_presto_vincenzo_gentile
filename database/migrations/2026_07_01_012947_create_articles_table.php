@@ -12,10 +12,11 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
-            $table->decimal('price', 8, 2);
-            $table->foreignId('category_id')->constrained();
-            $table->foreignId('user_id')->constrained();
-            $table->boolean('is_accepted')->nullable();
+            $table->float('price', 8, 2);
+            $table->unsignedBigInteger('category_id')->nullable();
+            $table->foreign('category_id')->references('id')->on('categories');
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
