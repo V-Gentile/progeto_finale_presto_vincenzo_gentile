@@ -36,7 +36,7 @@ class RevisorController extends Controller
         $article->setAccepted(true);
         return redirect()
             ->back()
-            ->with('message', 'Accettato annuncio $article->title');
+            ->with('message', "Accettato annuncio {$article->title}");
     }
 
     public function reject(Article $article)
@@ -44,7 +44,7 @@ class RevisorController extends Controller
         $article->setAccepted(false);
         return redirect()
             ->back()
-            ->with('message', 'Rifiutato annuncio $article->title');
+            ->with('message', "Rifiutato annuncio {$article->title}");
     }
 
     public function undo($id)
