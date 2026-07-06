@@ -1,5 +1,6 @@
 @import './style.css';
 @import 'bootstrap';
+@import 'bootstrap-icons';
 
 :root {
     --bg-color: #F8F9FA;

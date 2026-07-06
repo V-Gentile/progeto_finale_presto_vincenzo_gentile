@@ -26,14 +26,59 @@
                     <p class="text-break">{{ $article_to_check->description }}</p>
                 </div>
 
-                <!-- Gestione Immagini -->
+                <!-- Immagini -->
                 <div class="col-12 col-md-5 mb-4">
-                    <div class="row g-2">
+                    <div class="row g-3">
                         @if ($article_to_check->images->count())
                             @foreach ($article_to_check->images as $key => $image)
-                            <div class="col-6 col-md-4 mb-4 text-center">
-                                <img src="{{ $image->getUrl(800, 800) }}" class="img-fluid rounded shadow-sm" alt="Immagine {{ $key + 1 }} dell'articolo '{{ $article_to_check->title }}'">
-                            </div>
+                                <div class="col-12 mb-3">
+                                    <div class="card shadow-sm">
+                                        <img src="{{ $image->getUrl(800, 800) }}" class="card-img-top" alt="Immagine {{ $key + 1 }} dell'articolo '{{ $article_to_check->title }}'">
+                                        <div class="card-body">
+                                            <h5 class="card-title mb-3 fw-bold">Ratings</h5>
+                                            <div class="row justify-content-center mb-2">
+                                                <div class="col-2">
+                                                    <div class="text-center mx-auto {{ $image->adult }}"></div>
+                                                </div>
+                                                <div class="col-10">Adult</div>
+                                            </div>
+                                            <div class="row justify-content-center mb-2">
+                                                <div class="col-2">
+                                                    <div class="text-center mx-auto {{ $image->violence }}"></div>
+                                                </div>
+                                                <div class="col-10">Violence</div>
+                                            </div>
+                                            <div class="row justify-content-center mb-2">
+                                                <div class="col-2">
+                                                    <div class="text-center mx-auto {{ $image->spoof }}"></div>
+                                                </div>
+                                                <div class="col-10">Spoof</div>
+                                            </div>
+                                            <div class="row justify-content-center mb-2">
+                                                <div class="col-2">
+                                                    <div class="text-center mx-auto {{ $image->racy }}"></div>
+                                                </div>
+                                                <div class="col-10">Racy</div>
+                                            </div>
+                                            <div class="row justify-content-center mb-3">
+                                                <div class="col-2">
+                                                    <div class="text-center mx-auto {{ $image->medical }}"></div>
+                                                </div>
+                                                <div class="col-10">Medical</div>
+                                            </div>
+                                            <hr>
+                                            <h5 class="card-title mb-3 fw-bold">Labels</h5>
+                                            @if ($image->labels)
+                                                @foreach ($image->labels as $label)
+                                                    <span class="badge bg-secondary mb-1">#{{ $label }}</span>
+                                                @endforeach
+                                            @else
+                                                <p class="fst-italic text-muted">No Labels</p>
+                                            @endif
+                                            
+                                        </div>
+                                    </div>
+                                </div>
                             @endforeach
                         @else
                             @for ($i = 0; $i < 6; $i++)
@@ -44,26 +89,28 @@
                         @endif
                     </div>
                 </div>
-                
-                <!-- Bottoni Azione -->
-                <div class="col-12 col-md-3 d-flex flex-column justify-content-center align-items-center gap-3">
-                    <form action="{{ route('accept', ['article' => $article_to_check]) }}" method="POST" class="w-100">
-                        @csrf
-                        @method('PATCH')
-                        <button type="submit" class="btn btn-success btn-lg w-100 fw-bold shadow-sm">
-                            <i class="bi bi-check-circle me-1"></i> Accetta
-                        </button>
-                    </form>
-                    
-                    <form action="{{ route('reject', ['article' => $article_to_check]) }}" method="POST" class="w-100">
-                        @csrf
-                        @method('PATCH')
-                        <button type="submit" class="btn btn-danger btn-lg w-100 fw-bold shadow-sm">
-                            <i class="bi bi-x-circle me-1"></i> Rifiuta
-                        </button>
-                    </form>
+                <!-- Bottoni -->
+                <div class="col-12 col-md-3 h-100">
+                    <div class="d-flex flex-column justify-content-center align-items-center gap-3 position-sticky" style="top: 2rem;">
+                        
+                        <form action="{{ route('accept', ['article' => $article_to_check]) }}" method="POST" class="w-100">
+                            @csrf
+                            @method('PATCH')
+                            <button type="submit" class="btn btn-success btn-lg w-100 fw-bold shadow-sm">
+                                <i class="bi bi-check-circle me-1"></i> Accetta
+                            </button>
+                        </form>
+                        
+                        <form action="{{ route('reject', ['article' => $article_to_check]) }}" method="POST" class="w-100">
+                            @csrf
+                            @method('PATCH')
+                            <button type="submit" class="btn btn-danger btn-lg w-100 fw-bold shadow-sm">
+                                <i class="bi bi-x-circle me-1"></i> Rifiuta
+                            </button>
+                        </form>
+                        
+                    </div>
                 </div>
-
                 @if (session()->has('message'))
                     <div class="row justify-content-center mt-3">
                         <div class="col-5 alert alert-success text-center shadow rounded">
